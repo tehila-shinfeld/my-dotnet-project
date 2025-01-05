@@ -16,6 +16,7 @@ namespace Swim.core
         {
             CreateMap<Student, StudentDto>().ReverseMap();
             CreateMap<Course, CourseDto>().ReverseMap();
+            CreateMap<Teacher, TeacherDto>().ReverseMap();
         }
     }
 }

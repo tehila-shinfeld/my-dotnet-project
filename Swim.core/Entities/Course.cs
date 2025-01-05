@@ -22,7 +22,6 @@
 
         public List<Student> Students { get; set; }
 
-
         public Teacher Teacher { get; set; }
 
         public int TeacherId { get; set; }

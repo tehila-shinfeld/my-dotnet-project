@@ -3,6 +3,5 @@
     public class TeacherDto
     {
         public int YearsOfSeniority { get; set; }
-
     }
 }

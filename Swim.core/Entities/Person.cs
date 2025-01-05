@@ -16,20 +16,5 @@
 
         public string Address { get; set; }
 
-        //public Person()
-        //{
-
-        //}
-
-        //public Person(int id, string firstName, string lastName, string email, string phone, int age, string address)
-        //{
-        //    Id = id;
-        //    FirstName = firstName;
-        //    LastName = lastName;
-        //    Email = email;
-        //    Phone = phone;
-        //    Age = age;
-        //    Address = address;
-        //}
     }
 }

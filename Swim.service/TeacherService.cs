@@ -55,7 +55,14 @@ namespace Swim.service
 
         public TeacherDto Change(int id, TeacherDto t)
         {
-
+            if (t == null)
+{
+    throw new ArgumentNullException(nameof(t), "The TeacherDto cannot be null.");
+}
+if (id <= 0)
+{
+    throw new ArgumentException("The id must be greater than zero.", nameof(id));
+}
             var tt = mapper.Map<Teacher>(t);
             var te = teacherRepository.ChangeTeacher(id, tt);
             var dto = mapper.Map<TeacherDto>(te);

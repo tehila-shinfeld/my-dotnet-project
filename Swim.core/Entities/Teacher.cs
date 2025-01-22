@@ -12,6 +12,6 @@
 
         public int YearsOfSeniority { get; set; }
 
-        public List<Course> courses { get; set; }
+        public List<Course> Courses { get; set; } = new List<Course>();
     }
 }

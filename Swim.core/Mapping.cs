@@ -14,8 +14,10 @@ namespace Swim.core
 
         public Mapping()
         {
+
             CreateMap<Student, StudentDto>().ReverseMap();
             CreateMap<Course, CourseDto>().ReverseMap();
+            //.ForMember(dest => dest.TeacherId, opt => opt.MapFrom(src => src. ?? "DefaultValue"));
             CreateMap<Teacher, TeacherDto>().ReverseMap();
         }
     }

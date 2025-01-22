@@ -1,4 +1,5 @@
-﻿using Swim.core.Entities;
+﻿using Microsoft.EntityFrameworkCore;
+using Swim.core.Entities;
 using Swim.Core.Repositories;
 
 namespace Swim.data.Repositories
@@ -17,7 +18,7 @@ namespace Swim.data.Repositories
 
         public IEnumerable<Student> GetAllStudents()
         {
-            return studentsData.students;
+            return studentsData.students.Include(s => s.Courses);
         }
 
         public Student GetStudentById(int id)

@@ -28,8 +28,8 @@ namespace Swim.service
 
         public IEnumerable<CourseDto> GetAll()
         {
-            var course = courseRepository.GetAllCourses();
-            var courseDto = mapper.Map<IEnumerable<CourseDto>>(course);
+            var courses = courseRepository.GetAllCourses() ;
+            var courseDto = mapper.Map<IEnumerable<CourseDto>>(courses);
             return courseDto;
         }
 

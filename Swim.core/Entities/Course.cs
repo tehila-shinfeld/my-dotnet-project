@@ -10,9 +10,9 @@
 
         public string DayOnWeek { get; set; }
 
-        public DateTime DateStart { get; set; }
+        public string DateStart { get; set; }
 
-        public DateTime DateEnd { get; set; }
+        public string DateEnd { get; set; }
 
         public int AmountOfLessons { get; set; }
 
@@ -20,9 +20,9 @@
 
         public int Price { get; set; }
 
-        public List<Student> Students { get; set; }
+        public List<Student> Students { get; set; } = new List<Student>();
 
-        public Teacher Teacher { get; set; }
+        public Teacher Teacher { get; set; } = new Teacher();
 
         public int TeacherId { get; set; }
     }

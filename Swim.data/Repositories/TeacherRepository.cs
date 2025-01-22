@@ -20,7 +20,7 @@ namespace Swim.data.Repositories
 
         public IEnumerable<Teacher> GetAllTeachers()
         {
-            return Data.teachers;
+            return Data.teachers.Include(c => c.Courses);
         }
 
         public Teacher GetTeacherById(int id)

@@ -8,17 +8,8 @@
         public int HealthInsurance { get; set; }
 
         public bool IsPaid { get; set; }
-        
-        public List<Course> Courses { get; set; }
 
-        //public Student() { }
+        public List<Course> Courses { get; set; } = new List<Course>();
 
-        //public Student(string schoolName, int healthInsurance, bool isPaid, Course course) : base()
-        //{
-        //    SchoolName = schoolName;
-        //    HealthInsurance = healthInsurance;
-        //    IsPaid = isPaid;
-        //    Course = course;
-        //}
     }
 }

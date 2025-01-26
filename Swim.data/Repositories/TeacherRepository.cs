@@ -56,13 +56,25 @@ namespace Swim.data.Repositories
 
         public Teacher Delete(int id)
         {
-            var t = Data.teachers.FirstOrDefault(x => x.Id == id);
-            if (t != null)
+            // נתק את המורה מכל הקורסים שלו
+            var courses = Data.courses.Where(c => c.TeacherId == id).ToList();
+            foreach (var course in courses)
             {
-                Data.teachers.Remove(t);
-                return t;
+                course.TeacherId = null;
             }
+
+            // מחק את המורה
+            var teacher = Data.teachers.Find(id);
+            if (teacher != null)
+            {
+                Data.teachers.Remove(teacher);
+                return teacher;
+
+            }
+
+            Data.SaveChanges();
             return null;
+
         }
     }
 }

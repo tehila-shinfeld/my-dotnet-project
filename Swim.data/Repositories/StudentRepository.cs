@@ -40,11 +40,21 @@ namespace Swim.data.Repositories
 
         public Student ChangeStudent(int id, Student s)
         {
-            var stusentToChange = studentsData.students.FirstOrDefault(s => s.Id == id);
-            if (stusentToChange != null)
+            var studentToChange = studentsData.students.FirstOrDefault(st => st.Id == id);
+            if (studentToChange != null)
             {
-                stusentToChange = s;
-                return s;
+                // עדכון השדות של האובייקט הקיים
+                studentToChange.FirstName = s.FirstName;
+                studentToChange.LastName = s.LastName;
+                studentToChange.Courses = s.Courses;
+                studentToChange.HealthInsurance = s.HealthInsurance;
+                studentToChange.IsPaid = s.IsPaid;
+                studentToChange.Id = s.Id;
+                studentToChange.Address = s.Address;
+                studentToChange.SchoolName = s.SchoolName;
+                studentToChange.Email = s.Email;
+                // הוסף שדות נוספים לפי הצורך
+                return studentToChange;
             }
             return null;
         }

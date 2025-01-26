@@ -30,7 +30,7 @@ namespace Swim.Api.Controllers
 
             if (t == null)
             {
-                return NotFound(id);
+                return NotFound("id: "+id+" not found");
             }
             return Ok(t);
         }

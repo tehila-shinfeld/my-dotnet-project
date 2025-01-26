@@ -4,7 +4,6 @@ using Swim.core.Entities;
 using Swim.core.Service;
 namespace Swim.Api.Controllers
 {
-    // i am :)
     [Route("api/[controller]")]
     [ApiController]
     public class CourseController : ControllerBase

@@ -1,4 +1,6 @@
+using Microsoft.EntityFrameworkCore;
 using Swim.core;
+using Swim.core.Entities;
 using Swim.core.Repositories;
 using Swim.core.Service;
 using Swim.Core.Repositories;
@@ -8,7 +10,19 @@ using Swim.service;
 using Swim.Service;
 using System.Text.Json.Serialization;
 var builder = WebApplication.CreateBuilder(args);
-
+//using (var scope = app.Services.CreateScope())
+//{
+//    var context = scope.ServiceProvider.GetRequiredService<DataContext>();
+//    context.Database.Migrate(); // להחלת מיגרציות
+//    if (!context.students.Any())
+//    {
+//        context.students.AddRange(
+//            new Student { FirstName = "Alice", Age = 20 },
+//            new Student { FirstName = "Bob", Age = 22 }
+//        );
+//        context.SaveChanges();
+//    }
+//}
 builder.Services.AddControllers().AddJsonOptions(options =>
 {
     options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
@@ -46,3 +60,4 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+

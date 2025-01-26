@@ -3,13 +3,13 @@
     public class Student : Person
     {
 
-        public string SchoolName { get; set; }
+        public string? SchoolName { get; set; }
 
-        public int HealthInsurance { get; set; }
+        public int? HealthInsurance { get; set; }
 
-        public bool IsPaid { get; set; }
+        public bool? IsPaid { get; set; }
 
-        public List<Course> Courses { get; set; } = new List<Course>();
+        public List<Course>? Courses { get; set; } = new List<Course>();
 
     }
 }

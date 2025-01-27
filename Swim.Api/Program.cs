@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Swim.Api;
 using Swim.core;
 using Swim.core.Entities;
 using Swim.core.Repositories;
@@ -10,19 +11,6 @@ using Swim.service;
 using Swim.Service;
 using System.Text.Json.Serialization;
 var builder = WebApplication.CreateBuilder(args);
-//using (var scope = app.Services.CreateScope())
-//{
-//    var context = scope.ServiceProvider.GetRequiredService<DataContext>();
-//    context.Database.Migrate(); // להחלת מיגרציות
-//    if (!context.students.Any())
-//    {
-//        context.students.AddRange(
-//            new Student { FirstName = "Alice", Age = 20 },
-//            new Student { FirstName = "Bob", Age = 22 }
-//        );
-//        context.SaveChanges();
-//    }
-//}
 builder.Services.AddControllers().AddJsonOptions(options =>
 {
     options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
@@ -31,7 +19,6 @@ builder.Services.AddControllers().AddJsonOptions(options =>
 
 builder.Services.AddSwaggerGen();
 
-//builder.Services.AddSingleton<IDataContext, DataContext>();
 builder.Services.AddDbContext<DataContext>();
 
 builder.Services.AddScoped<IstudentService, StudentService>();
@@ -54,9 +41,9 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 app.UseHttpsRedirection();
-
 app.UseAuthorization();
-
+//Middleware השבתת האפליקציה בשבת ע"י הוספת 
+app.UseShabbat();
 app.MapControllers();
 
 app.Run();

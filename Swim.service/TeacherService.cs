@@ -18,7 +18,6 @@ namespace Swim.service
         private readonly IRepositoryManager repositoryManager;
         private readonly IMapper mapper;
 
-
         public TeacherService(ITeacherRepository teacherRepository, IRepositoryManager repositoryManager, IMapper mapper)
         {
             this.teacherRepository = teacherRepository;

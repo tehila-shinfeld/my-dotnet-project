@@ -28,9 +28,10 @@ namespace Swim.data.Repositories
             CourseRepository = courseRepository;
         }
 
-        public void Save()
+        public async Task SaveAsync()
         {
-            data.SaveChanges();
+            await data.SaveChangesAsync();
         }
+
     }
 }

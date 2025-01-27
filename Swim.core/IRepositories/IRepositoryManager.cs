@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Swim.core.Repositories
 {
@@ -15,6 +16,6 @@ namespace Swim.core.Repositories
 
         ICourseRepository CourseRepository { get; }
 
-        void Save();
+        public  Task SaveAsync();
     }
 }

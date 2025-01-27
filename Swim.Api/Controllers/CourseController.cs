@@ -16,15 +16,15 @@ namespace Swim.Api.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<CourseDto> Get()
+        public async Task<IEnumerable<CourseDto>> Get()
         {
-            return courseService.GetAll();
+            return await courseService.GetAllAsyc();
         }
 
         [HttpGet("{id}")]
-        public ActionResult Get(int id)
+        public async Task<ActionResult> Get(int id)
         {
-            var c = courseService.GetById(id);
+            var c = await courseService.GetByIdAsync(id);
 
             if (c == null)
             {
@@ -34,10 +34,10 @@ namespace Swim.Api.Controllers
         }
 
         [HttpGet("type/{type}")]
-        public ActionResult Get(string type)
+        public async Task<ActionResult> Get(string type)
         {
 
-            var course = courseService.GetByType(type);
+            var course = await courseService.GetByTypeAsync(type);
 
             if (course == null)
             {
@@ -47,20 +47,20 @@ namespace Swim.Api.Controllers
         }
 
         [HttpPost]
-        public ActionResult Post([FromBody] CourseDto c)
+        public async Task<ActionResult>  Post([FromBody] CourseDto c)
         {
             if (c != null)
             {
-                courseService.Add(c);
+               await courseService.AddAsync(c);
                 return Ok(c);
             }
             return NotFound(null);
         }
 
         [HttpPut("{id}")]
-        public ActionResult Put(int id, [FromBody] CourseDto c)
+        public async Task<ActionResult> Put(int id, [FromBody] CourseDto c)
         {
-            var c1 = courseService.Change(id, c);
+            var c1 = await courseService.ChangeAsync(id, c);
             if (c1 != null)
             {
                 return Ok(c1);
@@ -69,9 +69,9 @@ namespace Swim.Api.Controllers
         }
 
         [HttpDelete("{id}")]
-        public ActionResult Delete(int id)
+        public async Task<ActionResult> Delete(int id)
         {
-            var c = courseService.Del(id);
+            var c  =await courseService.DelAsync(id);
             if (c != null)
             {
                 return Ok(c);

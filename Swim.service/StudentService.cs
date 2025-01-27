@@ -26,49 +26,49 @@ namespace Swim.Service
             this.mapper = mapper;
         }
 
-        public IEnumerable<StudentDto> GetAll()
+        public async Task<IEnumerable<StudentDto>> GetAllAsync()
         {
-            var list = studentRepository.GetAllStudents();
-            var listStudentsDto=mapper.Map<IEnumerable<StudentDto>>(list);
+            var list = await Task.Run(() => studentRepository.GetAllStudents());
+            var listStudentsDto = mapper.Map<IEnumerable<StudentDto>>(list);
             return listStudentsDto;
         }
 
-        public StudentDto GetById(int id)
+        public async Task<StudentDto> GetByIdAsync(int id)
         {
-            var s = studentRepository.GetStudentById(id);
+            var s = await Task.Run(() => studentRepository.GetStudentById(id));
             var SDTO = mapper.Map<StudentDto>(s);
             return SDTO;
         }
-        public StudentDto GetByName(string name)
+        public async Task<StudentDto> GetByNameAsync(string name)
         {
-            var s =  studentRepository.GetStudentByName(name);
+            var s = await Task.Run(() => studentRepository.GetStudentByName(name));
             var SDTO = mapper.Map<StudentDto>(s);
             return SDTO;
         }
-        
-        public void Add(StudentDto s)
+
+        public async Task AddAsync(StudentDto s)
         {
             var student = mapper.Map<Student>(s);
             studentRepository.AddStudent(student);
-            repositoryManager.Save();
+            repositoryManager.SaveAsync();
         }
 
-        public StudentDto Change(int id, StudentDto s)
+        public async Task<StudentDto> ChangeAsync(int id, StudentDto s)
         {
             Student student = mapper.Map<Student>(s);
             var c = studentRepository.ChangeStudent(id, student);
-            repositoryManager.Save();
+            repositoryManager.SaveAsync();
             return s;
         }
-        
-        public StudentDto Del(int id)
+
+        public async Task<StudentDto> DelAsync(int id)
         {
             var s = studentRepository.Delete(id);
             var SDTO = mapper.Map<StudentDto>(s);
-            repositoryManager.Save();
+            repositoryManager.SaveAsync();
             return SDTO;
         }
 
-   
+
     }
 }

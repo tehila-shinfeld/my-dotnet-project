@@ -26,51 +26,51 @@ namespace Swim.service
             this.mapper = mapper;
         }
 
-        public IEnumerable<CourseDto> GetAll()
+        public async Task<IEnumerable<CourseDto>> GetAllAsyc()
         {
-            var courses = courseRepository.GetAllCourses() ;
+            var courses = await Task.Run(() => courseRepository.GetAllCourses());
             var courseDto = mapper.Map<IEnumerable<CourseDto>>(courses);
             return courseDto;
         }
 
-
-        public CourseDto GetById(int id)
+        public async Task<CourseDto> GetByIdAsync(int id)
         {
-            var course = courseRepository.GetCourseById(id);
+            var course = await Task.Run(() => courseRepository.GetCourseById(id));
             var courseDto = mapper.Map<CourseDto>(course);
             return courseDto;
         }
 
-        public CourseDto GetByType(string type)
+        public async Task<CourseDto> GetByTypeAsync(string type)
         {
-            var course = courseRepository.GetCourseByType(type);
+            var course = await Task.Run(() => courseRepository.GetCourseByType(type));
             var courseDto = mapper.Map<CourseDto>(course);
             return courseDto;
         }
 
-        public void Add(CourseDto c)
+        public async Task AddAsync(CourseDto c)
         {
             var course = mapper.Map<Course>(c);
             courseRepository.AddCourse(course);
-            repositoryManager.Save();
+            repositoryManager.SaveAsync();
         }
 
-        public CourseDto Change(int id, CourseDto c)
+        public async Task<CourseDto> ChangeAsync(int id, CourseDto c)
         {
             var course = mapper.Map<Course>(c);
             var cc = courseRepository.ChangeCourse(id, course);
             var dto = mapper.Map<CourseDto>(cc);
-            repositoryManager.Save();
+            repositoryManager.SaveAsync();
             return dto;
         }
 
-        public CourseDto Del(int id)
+        public async Task<CourseDto> DelAsync(int id)
         {
 
             var c = courseRepository.Delete(id);
             var SDTO = mapper.Map<CourseDto>(c);
-            repositoryManager.Save();
+            repositoryManager.SaveAsync();
             return SDTO;
         }
+
     }
 }

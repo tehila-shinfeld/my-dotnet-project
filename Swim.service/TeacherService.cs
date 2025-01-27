@@ -26,55 +26,55 @@ namespace Swim.service
             this.mapper = mapper;
         }
 
-        public IEnumerable<TeacherDto> GetAll()
+        public async Task<IEnumerable<TeacherDto>> GetAllAsync()
         {
-            var t = teacherRepository.GetAllTeachers();
+            var t = await Task.Run(() => teacherRepository.GetAllTeachers());
             var tDTO = mapper.Map<IEnumerable<TeacherDto>>(t);
             return tDTO;
         }
-        public TeacherDto GetById(int id)
+        public async Task<TeacherDto> GetByIdAsync(int id)
         {
-            var t = teacherRepository.GetTeacherById(id);
+            var t = await Task.Run(() => teacherRepository.GetTeacherById(id));
             var tDTO = mapper.Map<TeacherDto>(t);
             return tDTO;
         }
 
-        public TeacherDto GetByName(string name)
+        public async Task<TeacherDto> GetByNameAsync(string name)
         {
-            var t = teacherRepository.GetTeacherByName(name);
+            var t = await Task.Run(() => teacherRepository.GetTeacherByName(name));
             var tDTO = mapper.Map<TeacherDto>(t);
             return tDTO;
         }
 
-        public void Add(TeacherDto t)
+        public async Task AddAsync(TeacherDto t)
         {
             var te = mapper.Map<Teacher>(t);
             teacherRepository.AddTeacher(te);
-            repositoryManager.Save();
+            repositoryManager.SaveAsync();
         }
 
-        public TeacherDto Change(int id, TeacherDto t)
+        public async Task<TeacherDto> ChangeAsync(int id, TeacherDto t)
         {
             if (t == null)
-{
-    throw new ArgumentNullException(nameof(t), "The TeacherDto cannot be null.");
-}
-if (id <= 0)
-{
-    throw new ArgumentException("The id must be greater than zero.", nameof(id));
-}
+            {
+                throw new ArgumentNullException(nameof(t), "The TeacherDto cannot be null.");
+            }
+            if (id <= 0)
+            {
+                throw new ArgumentException("The id must be greater than zero.", nameof(id));
+            }
             var tt = mapper.Map<Teacher>(t);
             var te = teacherRepository.ChangeTeacher(id, tt);
             var dto = mapper.Map<TeacherDto>(te);
-            repositoryManager.Save();
+            repositoryManager.SaveAsync();
             return dto;
         }
 
-        public TeacherDto Del(int id)
+        public async Task<TeacherDto> DelAsync(int id)
         {
             var t = teacherRepository.Delete(id);
             var SDTO = mapper.Map<TeacherDto>(t);
-            repositoryManager.Save();
+            repositoryManager.SaveAsync();
             return SDTO;
         }
     }

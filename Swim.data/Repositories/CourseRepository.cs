@@ -21,8 +21,9 @@ namespace Swim.data.Repositories
 
         public IEnumerable<Course> GetAllCourses()
         {
-            return dataCourse.courses.Include(c => c.Teacher).Include( t=>t.Students);
+            return  dataCourse.courses.Include(c => c.Teacher).Include(t => t.Students);
         }
+
         public Course GetCourseById(int id)
         {
             var c = dataCourse.courses.ToList().Find(t => t.Id == id);
@@ -34,6 +35,7 @@ namespace Swim.data.Repositories
             var course = dataCourse.courses.ToList().Find(c => c.Type.ToLower() == type.ToLower());
             return course;
         }
+
         public void AddCourse(Course c)
         {
             dataCourse.courses.Add(c);
@@ -44,11 +46,27 @@ namespace Swim.data.Repositories
             var courseToChange = dataCourse.courses.FirstOrDefault(c => c.Id == id);
             if (courseToChange != null)
             {
-                courseToChange = c;
-                return courseToChange;
+                // עדכון שדות האובייקט הקיים
+                courseToChange.CurrentAmount = c.CurrentAmount;
+                courseToChange.MaxAmount = c.MaxAmount;
+                courseToChange.DayOnWeek = c.DayOnWeek;
+                courseToChange.DateStart = c.DateStart;
+                courseToChange.DateEnd = c.DateEnd;
+                courseToChange.AmountOfLessons = c.AmountOfLessons;
+                courseToChange.Type = c.Type;
+                courseToChange.Price = c.Price;
+                courseToChange.TeacherId = c.TeacherId;
 
+                // עדכון הרשימה של הסטודנטים (למשל, אם מחליפים את כל הרשימה)
+                courseToChange.Students = c.Students ?? new List<Student>();
+
+                // עדכון האובייקט של המורה
+                courseToChange.Teacher = c.Teacher ?? new Teacher();
+
+                return courseToChange;
             }
             return null;
+
         }
 
         public Course Delete(int id)

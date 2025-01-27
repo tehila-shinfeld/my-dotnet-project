@@ -9,9 +9,9 @@ namespace Swim.core.Repositories
 {
     public interface ICourseRepository
     {
-        IEnumerable<Course> GetAllCourses();
+        public IEnumerable<Course> GetAllCourses();
 
-        Course GetCourseById(int id);
+        public Course GetCourseById(int id);
 
         public Course GetCourseByType(string type);
 

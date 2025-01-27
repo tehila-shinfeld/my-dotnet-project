@@ -18,15 +18,15 @@ namespace Swim.Api.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<TeacherDto> Get()
+        public async Task<IEnumerable<TeacherDto>> Get()
         {
-            return teacherService.GetAll();
+            return await teacherService.GetAllAsync();
         }
 
         [HttpGet("{id}")]
-        public ActionResult Get(int id)
+        public async Task<ActionResult> Get(int id)
         {
-            var t = teacherService.GetById(id);
+            var t = await teacherService.GetByIdAsync(id);
 
             if (t == null)
             {
@@ -36,10 +36,10 @@ namespace Swim.Api.Controllers
         }
 
         [HttpGet("name/{name}")]
-        public ActionResult Get(string name)
+        public async Task<ActionResult> Get(string name)
         {
 
-            var teacher = teacherService.GetByName(name);
+            var teacher = await teacherService.GetByNameAsync(name);
 
             if (teacher == null)
             {
@@ -49,20 +49,20 @@ namespace Swim.Api.Controllers
         }
 
         [HttpPost]
-        public ActionResult Post([FromBody] TeacherDto t)
+        public async Task<ActionResult> Post([FromBody] TeacherDto t)
         {
             if (t != null)
             {
-                teacherService.Add(t);
+                await teacherService.AddAsync(t);
                 return Ok(t);
             }
             return NotFound(t);
         }
 
         [HttpPut("{id}")]
-        public ActionResult Put(int id, [FromBody] TeacherDto t)
+        public async Task<ActionResult> Put(int id, [FromBody] TeacherDto t)
         {
-            TeacherDto t1 = teacherService.Change(id, t);
+            TeacherDto t1 = await teacherService.ChangeAsync(id, t);
             if (t1 != null)
             {
                 return Ok(t1);
@@ -71,9 +71,9 @@ namespace Swim.Api.Controllers
         }
 
         [HttpDelete("{id}")]
-        public ActionResult Delete(int id)
+        public async Task<ActionResult> Delete(int id)
         {
-            var t = teacherService.Del(id);
+            var t = await teacherService.DelAsync(id);
             if (t != null)
             {
                 return Ok(t);

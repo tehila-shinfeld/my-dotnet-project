@@ -11,16 +11,16 @@ namespace Swim.core.Service
 {
     public interface IstudentService
     {
-        public IEnumerable<StudentDto> GetAll();
+        public Task<IEnumerable<StudentDto>> GetAllAsync();
 
-        public StudentDto GetById(int id);
+        public Task<StudentDto> GetByIdAsync(int id);
 
-        public StudentDto GetByName(string name);
+        public Task<StudentDto> GetByNameAsync(string name);
 
-        public void Add(StudentDto s);
+        public Task AddAsync(StudentDto s);
 
-        public StudentDto Change(int id, StudentDto s);
+        public Task<StudentDto> ChangeAsync(int id, StudentDto s);
 
-        public StudentDto Del(int id);
+        public Task<StudentDto> DelAsync(int id);
     }
 }

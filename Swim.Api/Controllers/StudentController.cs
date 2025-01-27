@@ -19,15 +19,15 @@ namespace SwimSystem.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<StudentDto> Get()
+        public async  Task<IEnumerable<StudentDto>> Get()
         {            
-            return studentsData.GetAll();
+            return await studentsData.GetAllAsync();
         }
 
         [HttpGet("{id}")]
-        public ActionResult Get(int id)
+        public async Task<ActionResult> Get(int id)
         {
-            StudentDto s = studentsData.GetById(id);
+            StudentDto s = await studentsData.GetByIdAsync(id);
             if (s == null)
             {
                 return NotFound(id);
@@ -36,9 +36,9 @@ namespace SwimSystem.Controllers
         }
 
         [HttpGet("name/{name}")]
-        public ActionResult Get(string name)
+        public async Task<ActionResult> Get(string name)
         {
-            StudentDto s = studentsData.GetByName(name);
+            StudentDto s =await  studentsData.GetByNameAsync(name);
             if (s == null)
             {
                 return NotFound($"student {name} not found");
@@ -47,20 +47,20 @@ namespace SwimSystem.Controllers
         }
 
         [HttpPost]
-        public ActionResult Post([FromBody] StudentDto s)
+        public async Task<ActionResult>Post([FromBody] StudentDto s)
         {
             if (s != null)
             {
-                studentsData.Add(s);
+                studentsData.AddAsync(s);
                 return Ok(s);
             }
             return NotFound(s);
         }
 
         [HttpPut("{id}")]
-        public ActionResult Put(int id, [FromBody] StudentDto s)
+        public async Task<ActionResult> Put(int id, [FromBody] StudentDto s)
         {
-            StudentDto s1 = studentsData.Change(id, s);
+            StudentDto s1 = await studentsData.ChangeAsync(id, s);
             if (s1 != null)
             {
                 return Ok(s1);
@@ -69,9 +69,9 @@ namespace SwimSystem.Controllers
         }
 
         [HttpDelete("{id}")]
-        public ActionResult Delete(int id)
+        public async Task<ActionResult> Delete(int id)
         {
-            var s = studentsData.Del(id);
+            var s = await studentsData.DelAsync(id);
             if (s != null)
             {
                 return Ok(s);

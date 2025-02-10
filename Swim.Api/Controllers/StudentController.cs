@@ -1,10 +1,11 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Swim.core.DTOs;
 using Swim.core.Entities;
 using Swim.core.Service;
 using Swim.Service;
-namespace SwimSystem.Controllers
+namespace Swim.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -15,12 +16,12 @@ namespace SwimSystem.Controllers
 
         public StudentController(IstudentService studentsD)
         {
-            this.studentsData = studentsD;
+            studentsData = studentsD;
         }
-
+        [Authorize]
         [HttpGet]
-        public async  Task<IEnumerable<StudentDto>> Get()
-        {            
+        public async Task<IEnumerable<StudentDto>> Get()
+        {
             return await studentsData.GetAllAsync();
         }
 
@@ -38,7 +39,7 @@ namespace SwimSystem.Controllers
         [HttpGet("name/{name}")]
         public async Task<ActionResult> Get(string name)
         {
-            StudentDto s =await  studentsData.GetByNameAsync(name);
+            StudentDto s = await studentsData.GetByNameAsync(name);
             if (s == null)
             {
                 return NotFound($"student {name} not found");
@@ -47,7 +48,7 @@ namespace SwimSystem.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult>Post([FromBody] StudentDto s)
+        public async Task<ActionResult> Post([FromBody] StudentDto s)
         {
             if (s != null)
             {

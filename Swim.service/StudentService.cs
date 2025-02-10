@@ -50,14 +50,14 @@ namespace Swim.Service
         {
             var student = mapper.Map<Student>(s);
             studentRepository.AddStudent(student);
-            repositoryManager.SaveAsync();
+           await repositoryManager.SaveAsync();
         }
 
         public async Task<StudentDto> ChangeAsync(int id, StudentDto s)
         {
             Student student = mapper.Map<Student>(s);
             var c = studentRepository.ChangeStudent(id, student);
-            repositoryManager.SaveAsync();
+            await repositoryManager.SaveAsync();
             return s;
         }
 
@@ -65,7 +65,7 @@ namespace Swim.Service
         {
             var s = studentRepository.Delete(id);
             var SDTO = mapper.Map<StudentDto>(s);
-            repositoryManager.SaveAsync();
+            await repositoryManager.SaveAsync();
             return SDTO;
         }
 

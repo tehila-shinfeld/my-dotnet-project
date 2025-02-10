@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
+using Swim.Api.Controllers;
 using Swim.data;
-using SwimSystem.Controllers;
 
 namespace Swim.tests
 {

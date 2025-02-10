@@ -51,7 +51,7 @@ namespace Swim.service
         {
             var course = mapper.Map<Course>(c);
             courseRepository.AddCourse(course);
-            repositoryManager.SaveAsync();
+           await repositoryManager.SaveAsync();
         }
 
         public async Task<CourseDto> ChangeAsync(int id, CourseDto c)
@@ -59,7 +59,7 @@ namespace Swim.service
             var course = mapper.Map<Course>(c);
             var cc = courseRepository.ChangeCourse(id, course);
             var dto = mapper.Map<CourseDto>(cc);
-            repositoryManager.SaveAsync();
+            await repositoryManager.SaveAsync();
             return dto;
         }
 
@@ -68,7 +68,7 @@ namespace Swim.service
 
             var c = courseRepository.Delete(id);
             var SDTO = mapper.Map<CourseDto>(c);
-            repositoryManager.SaveAsync();
+            await repositoryManager.SaveAsync();
             return SDTO;
         }
 
